@@ -1,0 +1,18 @@
+.modal {
+    width: 220px;
+    background-color: white;
+    z-index: 0;
+    position: absolute;
+    border-radius: 10px;
+    display: none;
+    padding-right: 5px;
+}
+
+.emoji {
+	background-color: transparent;
+	border: 0px;
+	padding: 0px;
+	padding-left: 4px;
+	font-size: 18px;
+	outline: none;
+}

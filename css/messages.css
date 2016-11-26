@@ -1,0 +1,28 @@
+.message {
+	padding: 10px;
+	font-size: 14px;
+}
+
+.message-header {
+	margin-bottom: 5px;
+    display: -webkit-flex;
+    display: flex; 
+}
+
+.sender-name {
+	color: #4a89dc;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.timestamp {
+	color: #757575;
+}
+
+.message-text {
+	margin-top: 5px;
+}
+
+.mention {
+	color: #4a89dc;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+      <link rel="stylesheet" href="css/chat.css">
+      <link rel="stylesheet" href="css/messages.css">
+      <link rel="stylesheet" href="css/emoji.css">
+</head>
+
+<body onresize = "handleResize()">
+  <div class = "wrapper" id = "wrapper">
+    <div class = "header">
+      <div class = "horizontal-container">
+        <div id = "greeting" class = "greeting">Hello, @</div>
+        <div class = "sign-out"><a href = "#" onclick = "signout()">Sign out</a></div>
+      </div>
+    </div>
+
+    <div class = "body" id = "listBody">
+    </div>
+    <div class = "footer" id = "footer">
+      <div class = "modal" id="emoji-view"></div>
+      <div id = "message-form" class = "horizontal-container">
+        <div>
+          <img onclick = "emojiClick()" class = "icon" type="image" src="img/smile.png" />
+          <input class = "file-input" type = "file" id = "file-input" accept="image/*" onchange="fileSelected()">
+          <img id = "attachment" class = "icon" type="image" src="img/attachment.png"/>
+          <img id = "tick" class = "icon" type="image" src="img/tick.png"/>
+          <div class="loader" id = "loader"></div>
+        </div>
+        <textarea id="message-field" onfocus="this.value = this.value;" class = "container-element" placeholder="Type here..."></textarea>
+        <div>
+          <input id = "send" class = "button" type = "submit" value = "Send">
+        </div>
+      </div>
+      <div class = "horizontal-container">
+        <label id = "file-name"></label>
+        <img id = "cross" class = "icon" src = "img/cross.png">
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src = "js/ChatModel.js"></script>
+  <script type="text/javascript" src = "js/ChatController.js"></script>
+  <script type="text/javascript" src = "js/ListView.js"></script>
+  <script type="text/javascript" src = "js/EmojiView.js"></script>
+  <script type="text/javascript" src = "js/ImagePickerView.js"></script>
+  <script type="text/javascript" src = "js/ApiCaller.js"></script>
+  <script type="text/javascript" src = "js/MentionsParser.js"></script>
+  <script type="text/javascript" src = "js/CookieManager.js"></script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    var parser = new MentionsParser();
+    var mentions = parser.formatMentions("ssad @fas @aaa aaa");
+    console.log(mentions);
+
+    var cookies = new CookieManager();
+
+    init();
+
+    function init() {
+      if (!cookies.getCookie("sessionId")) {
+        window.location = "login.html";
+      }
+      document.getElementById("greeting").innerHTML = ("Hello, @" + cookies.getCookie("username") + "!");
+    }
+
+    function emojiClick() {
+      var emojiPanel = document.getElementById("emoji-view");
+      if (emojiPanel.style.display == "block") {
+        emojiPanel.style.display = "none";
+      } else {
+        emojiPanel.style.display = "block";
+        handleResize();
+      }
+    }
+
+    function signout() {
+      cookies.setCookie("sessionId", "", 0);
+      cookies.setCookie("fullname", "", 0);
+      cookies.setCookie("username", "", 0);
+      cookies.setCookie("token", "", 0);
+      window.location = "login.html";
+    }
+
+    var controller = new ChatController();
+
+    function handleResize() {
+      var emojiPanel = document.getElementById("emoji-view");
+      var chatBody = document.getElementById("wrapper");
+      var footer = document.getElementById("footer");
+      emojiPanel.style.left = (Math.max(chatBody.offsetLeft - emojiPanel.offsetWidth - 10, 5)) + 'px';
+      emojiPanel.style.top = (chatBody.offsetHeight + chatBody.offsetTop - emojiPanel.offsetHeight - footer.offsetHeight) + 'px';
+    }
+  </script>
+</body>
+</html>

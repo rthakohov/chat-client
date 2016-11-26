@@ -1,0 +1,150 @@
+body {
+	font-family: Helvetica;
+	background: #eee;
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+	width: 600px;
+	margin: 4em auto;
+	background: #fafafa;
+	border: 1px solid #ebebeb;
+	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+	box-sizing: border-box;
+}
+
+.header, .footer .body {
+	width: 100%;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #ebebeb;
+	padding: 20px 0px 0px 10px;
+	box-sizing: border-box;
+	color: #636363;
+	box-sizing: border-box;
+}
+
+.header {
+	padding-bottom: 10px;
+}
+
+.body {
+	height: 500px;
+  	overflow-y: scroll;
+  	word-wrap:break-word;
+}
+
+.greeting {
+	width: 88.5%;
+}
+
+.sign-out {
+	color: #4a89dc;
+}
+
+.footer {
+	/*height: 15%;*/
+	border-top: 1px solid #ebebeb; 
+}
+
+.horizontal-container {
+    display: -webkit-flex;
+    display: flex; 
+}
+
+.button {
+	background-color: transparent;
+	border: 0px;
+	font-size: 14px;
+	color: #4a89dc;
+	font-weight: bold;
+	margin-left: 5px;
+	outline: none;
+}
+
+textarea {
+	font-size: 14px;
+	height: 72px;
+	-webkit-appearance: none;
+	padding: 10px;
+	padding-left: 5px;
+	margin-left: 0px;
+	margin-bottom: 5px;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #dddbdb;
+	box-sizing: border-box;
+}
+
+.loader {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    margin-top: 5px;
+    margin-left: 290px;
+}
+
+.icon {
+	width: 15px;
+	height: 15px;
+	padding: 0px;
+	margin-left:5px;
+	margin-top:7px;
+}
+
+.image-preview {
+	height: 50px;
+	width: 50px;
+	margin: 10px;
+}
+
+.file-input {
+	display: none;
+}
+
+#attachment {
+	display: block;
+}
+
+#loader {
+	margin: 0px;
+	width: 12px;
+	height: 12px;
+	margin-left:5px;
+	margin-top:7px;
+	margin-right: 5px;
+	display: none;
+}
+
+label {
+	font-size: 14px;
+	margin-left: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#cross {
+	width: 10px;
+	height: 10px;
+	margin-top: 9px;
+	display: none;
+}
+
+#tick {
+	display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
