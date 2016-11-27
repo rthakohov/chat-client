@@ -1,8 +1,12 @@
+/*
+ * This class contains functions for processing mentions in messages
+*/
 function MentionsParser() {
 
 }
 
 MentionsParser.prototype = {
+	// Returns an array of usernames found in the message
 	extractMentions: function(message) {
 		var expr = /@[a-zA-Z1-9]+/;
 
@@ -19,6 +23,7 @@ MentionsParser.prototype = {
 		return mentions;
 	},
 
+	// Reformats the message so that usernames are highlited
 	formatMentions: function(message) {
 		var expr = /@[a-zA-Z1-9]+/;
 

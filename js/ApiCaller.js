@@ -1,3 +1,6 @@
+/*
+ * This class contains functions for making API calls.
+*/
 function ApiCaller() {
 	this.API_URL = "http://localhost:8888/chatapi/index.php/";
 }

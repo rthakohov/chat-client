@@ -1,3 +1,6 @@
+/*
+ * This class provides methods to manipulate cookies
+*/
 function CookieManager() {
 
 }

@@ -1,3 +1,6 @@
+/*
+ * This view handles displaying and choosing emojis
+*/
 function EmojiView() {
 	this.body = document.getElementById("emoji-view");
 

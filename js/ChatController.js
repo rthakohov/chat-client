@@ -60,7 +60,6 @@ ChatController.prototype = {
   },
 
   startLoading: function(context) {
-    console.log("waiting");
     this.apiCaller.waitForMessages(this.lastLoaded, this, this.newMessagesLoaded, this.requestFailed);
   },
 
@@ -86,7 +85,6 @@ ChatController.prototype = {
     for (var i = 0; i < messages.length; i++) {
       var mentions = this.parser.extractMentions(messages[i].messageText);
       for (var j = 0; j < mentions.length; j++) {
-        console.log(mentions[i]);
         if (mentions[j] == this.cookies.getCookie("username")) {
           var notification = new Notification(messages[i].senderName + " (@" + messages[i].senderLogin + "): " + messages[i].messageText);
           break;

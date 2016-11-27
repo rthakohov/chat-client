@@ -1,7 +1,9 @@
-// ListView is a view for displaying lists of arbitrary data
-// rowRenderer is a function that accepts a model object (e.g. a chat message)
-// and renders a list row. This is done to keep the ListView generic
-// and independent of the type of content being displayed.
+/*
+ * ListView is a view for displaying lists of arbitrary data
+ * rowRenderer is a function that accepts a model object (e.g. a chat message)
+ * and renders a list row. This is done to keep the ListView generic
+ * and independent of the type of content being displayed.
+*/
 function ListView(elements, rowRenderer, context) {
 	this.elements = elements;
 	this.rowRenderer = rowRenderer;

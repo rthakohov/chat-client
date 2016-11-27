@@ -1,6 +1,3 @@
-// A model class that
-// * stores and gives access to data
-// * triggers a callback when data changes
 function ChatModel(messages) {
 	this.messages = messages;
 }
