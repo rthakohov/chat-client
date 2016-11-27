@@ -15,13 +15,17 @@ function ImagePickerView() {
 		_this.fileWasChosen();
 	}
 	this.crossView.onclick = function() {
-		_this.crossClicked();
+		_this.crossClicked(true);
 	}
 }
 
 ImagePickerView.prototype = {
 	setOnFileChosen: function(callback) {
 		this.onFileChosen = callback;
+	},
+
+	setOnCrossClicked: function(callback) {
+		this.onCrossClicked = callback;
 	},
 
 	attachClicked: function() {
@@ -47,7 +51,7 @@ ImagePickerView.prototype = {
 		this.crossView.style.display = "block";
 	},
 
-	crossClicked: function() {
+	crossClicked: function(triggerCallback) {
 		this.fileInput.value = "";
 
 		this.fileView.style.display = "none";
@@ -55,5 +59,9 @@ ImagePickerView.prototype = {
 		this.attachmentView.style.display = "block";
 		this.crossView.style.display = "none";
 		this.loadingView.style.display = "none";
+
+		if (triggerCallback) {
+			this.onCrossClicked();
+		}
 	}
 }

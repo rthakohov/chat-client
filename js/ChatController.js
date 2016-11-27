@@ -29,6 +29,9 @@ function ChatController() {
   this.imagePicker.setOnFileChosen(function(file) {
     _this.fileChosen(file);
   });
+  this.imagePicker.setOnCrossClicked(function(file) {
+    _this.imageUnattached(file);
+  });
   this.sendButton.onclick = function() {
     _this.sendMessage();
   }
@@ -193,6 +196,10 @@ ChatController.prototype = {
     };
 
     reader.readAsDataURL(file);
+  },
+
+  imageUnattached: function() {
+    this.attachmentUrl = null;
   },
 
   renderer: function(element, context) {
