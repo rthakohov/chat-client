@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Chat - Login</title>
-      <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -48,122 +48,122 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 
   <script type="text/javascript">
-      var apiCaller = new ApiCaller();
-      var cookies = new CookieManager();
+    var apiCaller = new ApiCaller();
+    var cookies = new CookieManager();
 
-      function login() {
-        try {
-          var userName = document.getElementById("username").value;
-          var password = document.getElementById("password").value;
+    function login() {
+      try {
+        var userName = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
 
-          var _this = this;
+        var _this = this;
 
-          apiCaller.createSession(userName, password, null, 
-            function(context, data) {
-              if (data.data) {
-                cookies.setCookie("sessionId", data.data.id, 1);
-                cookies.setCookie("token", data.data.token, 1);
-                cookies.setCookie("username", data.data.user.login, 1);
-                cookies.setCookie("fullname", data.data.user.name, 1);
-                window.location = "index.html";
-              } else {
-                console.log(data.error);
-                loginError();
-              }
-            },
-            function(context, data) {
-              alert("Failed to log in :( ");
-              console.log("error: " + data);
-            });
-        } catch(e) {
-          console.log("error: " + e);
-        }
+        apiCaller.createSession(userName, password, null, 
+          function(context, data) {
+            if (data.data) {
+              cookies.setCookie("sessionId", data.data.id, 1);
+              cookies.setCookie("token", data.data.token, 1);
+              cookies.setCookie("username", data.data.user.login, 1);
+              cookies.setCookie("fullname", data.data.user.name, 1);
+              window.location = "index.html";
+            } else {
+              console.log(data.error);
+              loginError();
+            }
+          },
+          function(context, data) {
+            alert("Failed to log in :( ");
+            console.log("error: " + data);
+          });
+      } catch(e) {
+        console.log("error: " + e);
+      }
+      return false;
+    }
+
+    function register() {
+      console.log("registering...");
+      var name = document.forms["register-form"]["name"].value;
+      var username = document.forms["register-form"]["username"].value;
+      var password = document.forms["register-form"]["password"].value;
+      var repeatPassword = document.forms["register-form"]["repeatPassword"].value;
+
+      if (validateRegistrationForm(name, username, password, repeatPassword)) {
+        apiCaller.createUser(name, username, password, null, 
+          function(context, data) {
+            if (data.data) {
+              window.location = "login.html";
+            } else {
+              registrationError();
+              console.log(data.error);
+            }
+          },
+          function(context, data) {
+            alert("Failed to register");
+          });
+      } 
+
+      return false;
+    }
+
+    function validateRegistrationForm(name, username, password, repeatPassword) {
+      if (username == "" || password == "" || repeatPassword == "") {
+        alert("Required fields are not filled!");
         return false;
-      }
+      } 
+      if (hasIllegalCharacters(name.replace(/ /g,''), "Name") 
+        || hasIllegalCharacters(username, "Username") 
+        || hasIllegalCharacters(password, "Password")) {
+        return false;
+    }
+    if (username.length > 32) {
+      alert("Username is too long!");
+      return false;
+    }
+    if (password.length < 6) {
+      alert("Password is too short!");
+      return false;
+    }
+    if (password != repeatPassword) {
+      alert("Passwords don't match!");
+      return false;
+    }
+    return true;
+  }
 
-      function register() {
-          console.log("registering...");
-          var name = document.forms["register-form"]["name"].value;
-          var username = document.forms["register-form"]["username"].value;
-          var password = document.forms["register-form"]["password"].value;
-          var repeatPassword = document.forms["register-form"]["repeatPassword"].value;
+  function hasIllegalCharacters(s, message) {
+    if (/([^a-zA-Z0-9])/.test(s)) {
+      alert(message + " can only contain letters (a-z, A-Z) and digits (0-9)!");
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-          if (validateRegistrationForm(name, username, password, repeatPassword)) {
-            apiCaller.createUser(name, username, password, null, 
-              function(context, data) {
-                if (data.data) {
-                  window.location = "login.html";
-                } else {
-                  registrationError();
-                  console.log(data.error);
-                }
-              },
-              function(context, data) {
-                alert("Failed to register");
-              });
-          } 
+  function loginError() {
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("login-error").style.display = "block";
+  }
 
-          return false;
-      }
+  function registrationError() {
+    document.getElementById("registration-error").style.display = "block";
+  }
 
-      function validateRegistrationForm(name, username, password, repeatPassword) {
-          if (username == "" || password == "" || repeatPassword == "") {
-              alert("Required fields are not filled!");
-              return false;
-          } 
-          if (hasIllegalCharacters(name.replace(/ /g,''), "Name") 
-            || hasIllegalCharacters(username, "Username") 
-            || hasIllegalCharacters(password, "Password")) {
-            return false;
-          }
-          if (username.length > 32) {
-            alert("Username is too long!");
-            return false;
-          }
-          if (password.length < 6) {
-            alert("Password is too short!");
-            return false;
-          }
-          if (password != repeatPassword) {
-              alert("Passwords don't match!");
-              return false;
-          }
-          return true;
-      }
+  function showRegistrationForm() {
+    document.getElementById('login-form').style.display='none';
+    document.getElementById('register-form').style.display='block';
+    document.getElementById('registration-hint').style.display='none';
+    document.getElementById('login-hint').style.display='block';
+  }
 
-      function hasIllegalCharacters(s, message) {
-        if (/([^a-zA-Z0-9])/.test(s)) {
-          alert(message + " can only contain letters (a-z, A-Z) and digits (0-9)!");
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      function loginError() {
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-        document.getElementById("login-error").style.display = "block";
-      }
-
-      function registrationError() {
-        document.getElementById("registration-error").style.display = "block";
-      }
-
-      function showRegistrationForm() {
-        document.getElementById('login-form').style.display='none';
-        document.getElementById('register-form').style.display='block';
-        document.getElementById('registration-hint').style.display='none';
-        document.getElementById('login-hint').style.display='block';
-      }
-
-      function showLoginForm() {
-        document.getElementById('login-form').style.display='block';
-        document.getElementById('register-form').style.display='none';
-        document.getElementById('registration-hint').style.display='block';
-        document.getElementById('login-hint').style.display='none';
-      }
-    </script> 
+  function showLoginForm() {
+    document.getElementById('login-form').style.display='block';
+    document.getElementById('register-form').style.display='none';
+    document.getElementById('registration-hint').style.display='block';
+    document.getElementById('login-hint').style.display='none';
+  }
+</script> 
 
 </body>
 </html>

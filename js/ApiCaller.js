@@ -33,22 +33,22 @@ ApiCaller.prototype = {
 
 	sendRequest: function(resource, type, params, context, onSuccess, onFail) {
 		var _this = this;
-	    $.ajax({
-	        type: type, 
-	        url : _this.API_URL + resource,
-	        data: params,
-	        dataType: "json",
-	        success: function(data) {
-	            if (onSuccess) {
-	            	onSuccess(context, data);
-	            }
-	        },
-	        error: function(rq, er, err) {
-	            console.log("fail: " + rq + " " + er + " " + err);
-	            if (onFail) {
-	            	onFail(context, err);
-	            }
-	        }
-	    }); 
+		$.ajax({
+			type: type, 
+			url : _this.API_URL + resource,
+			data: params,
+			dataType: "json",
+			success: function(data) {
+				if (onSuccess) {
+					onSuccess(context, data);
+				}
+			},
+			error: function(rq, er, err) {
+				console.log("fail: " + rq + " " + er + " " + err);
+				if (onFail) {
+					onFail(context, err);
+				}
+			}
+		}); 
 	}
 }
